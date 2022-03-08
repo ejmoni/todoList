@@ -14,23 +14,42 @@ body{
 
 .task-area{
     border: 1px solid lightblue;
+    margin-top: 1em;
+    position: relative;
 }
 .task-tabs{
     display: flex;
     border-bottom: 1px solid lightblue;
-    position: relative;
 }
 .task-tabs div{
     padding: 1em;
 }
 #under-line{
-    height: 3px;
+    height: 4px;
     background-color: plum;
     position: absolute;
     width: 60px;
     left: 0px;
     top: 50px;
     padding: 0px;
+    transition: 0.5s;
+}
+.task{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid lightblue;
+    position: relative;
+    padding: 1em;
+}
+.button-box{
+    display: flex;
+}
+.button-box button{
+    height: 100%;
+    border: none;
+    width: 5em;
+    margin: 0;
 }
 
 .task-done{

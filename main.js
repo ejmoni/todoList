@@ -1,11 +1,15 @@
 let taskInput = document.getElementById("task-input");
 let addButton = document.getElementById("add-button");
 let tabs = document.querySelectorAll(".task-tabs div");
+let underLine = document.getElementById("tab-underline")
 let taskList = [];
 let mode = "all";
 let filterList=[];
 
 addButton.addEventListener("click", addTask)
+taskInput.addEventListener("focus",function(){
+    taskInput.value="";
+});
 
 for(let i=1;i<tabs.length;i++){
     tabs[i].addEventListener("click",function(event){
@@ -25,29 +29,30 @@ function addTask(){
 }
 
 function render(){
-    let list =[];
+    let result = "";
+    list = [];
     if(mode=="all"){
         list = taskList;
     }else if(mode == "ongoing" || mode=="done"){
         list = filterList;
     }
 
-    let resultHTML =``;
+    let resultHTML ="";
     for(let i =0;i<list.length;i++){
-        if(taskList[i].isComplete){
+        if(list[i].isComplete){
             resultHTML+=`<div class="task">
             <div class="task-done">${list[i].taskContent}</div>
             <div>
-                <button onclick="toggleComplete('${list[i].id}')">Check</button>
-                <button onclick="deleteTask('${list[i].id}')">Delete</button>
+                <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         </div>`;
     }else{
             resultHTML +=`<div class="task">
         <div>${list[i].taskContent}</div>
         <div>
-            <button onclick="toggleComplete('${list[i].id}')">Check</button>
-            <button onclick="deleteTask('${list[i].id}')">Delete</button>
+            <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check"></i></button>
+            <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash-can"></i></button>
         </div>
     </div>`;
     }
@@ -79,9 +84,10 @@ function deleteTask(id){
    render();
 }
 function filter(event){
+
     mode =event.target.id;
-    let filterList=[];
-    if(mode==="all"){
+    filterList=[];
+    if(mode=="all"){
         render();
     }else if(mode =="ongoing"){
         for(let i=0;i<taskList.length;i++){
